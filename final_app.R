@@ -8,7 +8,7 @@ library(GGally)
 library(DT)
 library(xgboost)
 library(Matrix)
-setwd("C:/Users/rohit/OneDrive/Desktop/Projects/D-buddy")
+setwd("/Users/ashmita/Desktop/D-Buddy")
 
 d1<-read.csv("diabetes_cleaned.csv")
 d2<-read.csv("diabetes_cleaned1.csv")
@@ -580,7 +580,7 @@ server <- function(input, output,session) {
   })
   #=============================================================================================================================================================================
   # Load the cleaned dataset
-  df_insights <- read.csv("C:/Users/rohit/OneDrive/Desktop/D-Buddy/Datasets/diabetes_prediction/diabetes_cleaned2.csv")
+  df_insights <- read.csv("/Users/ashmita/Desktop/D-Buddy/diabetes_cleaned2.csv")
   
   # Ensure correct data types
   df_insights$diabetes <- as.factor(df_insights$diabetes)
@@ -1753,7 +1753,7 @@ Thus, BMI appears to be positively associated with diabetes prevalence."
   # --- Section 2: XGBoost Prediction ---
   
   # Load trained model
-  model_path <- "C:/Users/rohit/OneDrive/Desktop/Projects/D-buddy/Models/xgb_diabetes_model.model"
+  model_path <- "/Users/ashmita/Desktop/D-Buddy/xgb_diabetes_model.model"
   xgb_model <- xgb.load(model_path)
   
   observeEvent(input$predict_btn, {
@@ -1786,7 +1786,7 @@ Thus, BMI appears to be positively associated with diabetes prevalence."
     
     # Predict
     prob <- predict(xgb_model, user_dmatrix)
-    threshold <- readRDS("C:/Users/rohit/OneDrive/Desktop/Projects/D-buddy/Models/xgb_threshold.rds")
+    threshold <- readRDS("/Users/ashmita/Desktop/D-Buddy/xgb_threshold.rds")
     #threshold <- 0.099  # Adjust as per your ROC analysis
     pred <- ifelse(prob > threshold, 1, 0)
     
@@ -1897,7 +1897,7 @@ Thus, BMI appears to be positively associated with diabetes prevalence."
     req(input$diet_prediction, input$diet_glucose, input$diet_hba1c, input$diet_age, input$food_pref)
     
     # Load and clean food dataset
-    food_df <- read.csv("C:/Users/rohit/OneDrive/Desktop/Projects/D-buddy/Food_Cleaned.csv", stringsAsFactors = FALSE)
+    food_df <- read.csv("/Users/ashmita/Desktop/D-Buddy/Food_Cleaned.csv", stringsAsFactors = FALSE)
     food_df$GI <- as.numeric(food_df$GI)
     food_df$GL <- as.numeric(food_df$GL)
     food_df <- food_df[!is.na(food_df$GI) & !is.na(food_df$GL) & food_df$GI > 0 & food_df$GL > 0, ]
